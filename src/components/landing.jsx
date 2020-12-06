@@ -62,9 +62,10 @@ const Landing = props => {
             </div>
             <div className="pform__column">
               <h3>Amount</h3>
-              <input onChange={handleChange} />
+              <p>$0</p>
             </div>
           </div>
+          <button onClick={()=>alert('savings')}>Submit</button>
         </div>
       </div>
     );
