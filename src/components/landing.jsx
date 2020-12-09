@@ -7,7 +7,13 @@ const Landing = props => {
   const [amount, setAmount] = useState();
 
   const handleChange = e => {
-    setAmount(e.target.value);
+    setAmount(parseInt(e.target.value));
+  }
+
+  const handleSubmit =()=> {
+    if (!amount) return;
+    props.txfrFromChecking(amount);
+    setAmount("");
   }
 
     return (
@@ -43,10 +49,10 @@ const Landing = props => {
             </div>
             <div className="pform__column">
               <h3>Amount</h3>
-              <input onChange={handleChange} />
+              <input onChange={handleChange} value={amount} />
             </div>
           </div>
-          <button onClick={() => props.txfrFromChecking(amount)}>Submit</button> 
+          <button onClick={handleSubmit}>Submit</button> 
         </div>
   
         <div className="view__block">
@@ -62,7 +68,7 @@ const Landing = props => {
             </div>
             <div className="pform__column">
               <h3>Amount</h3>
-              <p>$0</p>
+              {/* <button onChange={handleBillPayAmount}>Submit</button> */}
             </div>
           </div>
           <button onClick={()=>alert('savings')}>Submit</button>

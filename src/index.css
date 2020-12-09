@@ -27,18 +27,25 @@ header {
   padding: 20px 40px;
 }
 
-.main {
-  align-items: center;
+main {
+  align-items: flex-start;
   display: flex;
+  flex: 1;
   justify-content: center;
   width: 100%;
+}
+
+.y-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .navs a {
   margin-left: 16px;
 }
 .view {
-  max-width: 60%;
+  max-width: 80%;
 }
 .view__block {
   border-top: 1px solid #ccc;
@@ -60,3 +67,13 @@ header {
   flex-direction: column;
 }
       
+.checking-transactions {
+  list-style-type: none;
+  padding: 0;
+}
+
+.checking-transactions li {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}

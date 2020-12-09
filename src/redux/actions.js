@@ -6,7 +6,13 @@ export const txfrFromChecking = amount => {
     return {
         type: TXFR_FROM_CHECKING,
         payload: {
-            amount
+            amount,
+            transaction: {
+                amount,
+                date: Date.now(),
+                destination: 'savings',
+                source: 'checking'
+            }
         }
     }
 }
