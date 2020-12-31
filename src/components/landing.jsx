@@ -1,23 +1,37 @@
 import { connect } from "react-redux";
-import { useState } from 'react';
-import { txfrFromChecking } from '../redux/actions';
+import { useState } from 'react'; //import hook
+import { doBillPay, txfrFromChecking } from '../redux/actions';
 
 const Landing = props => {
 
-  const [amount, setAmount] = useState();
+  const [amount, setAmount]                           = useState('');
+  const [billPayVendor, setBillPayVendor]             = useState('');
+  const [billPayAmt, setBillPayAmt]                   = useState('');
 
   const handleChange = e => {
     setAmount(parseInt(e.target.value));
   }
 
-  const handleSubmit =()=> {
+  const handleSubmit = () => {
     if (!amount) return;
     props.txfrFromChecking(amount);
     setAmount("");
   }
 
+  const handleBillPaySubmit = () => {
+    props.doBillPay(billPayAmt, billPayVendor);
+    setBillPayAmt("");
+    setBillPayVendor("");
+  }
+
+const handleBillPayChange = e => {
+  if (e.target.name === "billPayAmt") setBillPayAmt(e.target.value);
+  if (e.target.name ==="billPayVendor") setBillPayVendor(e.target.value);
+};
+
     return (
       <div className="view">
+        <p>{billPayAmt} - {billPayVendor}</p>
         <h1>Welcome to ACME Bank</h1>
   
         <div className="view__block">
@@ -60,7 +74,10 @@ const Landing = props => {
           <div className="pform">
             <div className="pform__column">
               <h3>Vendor Name</h3>
-              <p>Jimmy John's</p>
+              <input
+               onChange={handleBillPayChange}
+               name="billPayVendor" 
+               value={billPayVendor} />
             </div>
             <div className="pform__column">
               <h3>Account</h3>
@@ -68,16 +85,21 @@ const Landing = props => {
             </div>
             <div className="pform__column">
               <h3>Amount</h3>
-              {/* <button onChange={handleBillPayAmount}>Submit</button> */}
+              <input
+               name="billPayAmt"
+               onChange={handleBillPayChange} 
+               value={billPayAmt} 
+               />
             </div>
           </div>
-          <button onClick={()=>alert('savings')}>Submit</button>
+          <button onClick={handleBillPaySubmit}>Submit</button>
         </div>
       </div>
     );
   }
 
   const mapDispatchToProps = dispatch => ({
+    doBillPay: (amount, vendor) => dispatch(doBillPay(amount, vendor)), 
     txfrFromChecking: (val) => dispatch(txfrFromChecking(val * 1)),
   });
   

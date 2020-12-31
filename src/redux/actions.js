@@ -1,4 +1,4 @@
-import { TXFR_FROM_CHECKING, TXFR_FROM_SAVINGS } from "./actionTypes"
+import { TXFR_FROM_CHECKING, DO_BILL_PAY, TXFR_FROM_SAVINGS } from "./actionTypes"
 
 export const txfrFromChecking = amount => {
     //code here that calculates the new balance
@@ -16,3 +16,17 @@ export const txfrFromChecking = amount => {
         }
     }
 }
+
+export const doBillPay = (amount, vendor) => {
+    console.log('pota', amount, vendor);
+    return {
+        type: DO_BILL_PAY,
+        payload: {
+            amount,
+            date: Date.now(),
+            destination: vendor,
+            source: 'checking'
+        
+        }
+    }
+};
